@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_main"
+        android:icon="@drawable/home_line"
+        android:title="@string/menu_main" />
 
+    <item
+        android:id="@+id/menu_favorite"
+        android:icon="@drawable/heart_line"
+        android:title="@string/menu_favorite" />
+
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/emotion_line"
+        android:title="@string/menu_profile" />
 </menu>

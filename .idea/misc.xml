@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/SurfGallery/app/src/main/res/drawable/arrow_right_line.xml" value="0.1355" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/SurfGallery/app/src/main/res/drawable/search_line.xml" value="0.1355" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/SurfGallery/app/src/main/res/drawable/surf_edu.xml" value="0.1355" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/SurfGallery/app/src/main/res/drawable/surf_edu_full.xml" value="0.1355" />
         <entry key="..\:/Users/Marina/AndroidStudioProjects/SurfGallery/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Marina/AndroidStudioProjects/SurfGallery/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
       </map>
