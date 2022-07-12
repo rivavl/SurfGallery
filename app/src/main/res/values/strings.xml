@@ -3,4 +3,20 @@
     <string name="menu_main">Главная</string>
     <string name="menu_favorite">Избранное</string>
     <string name="menu_profile">Профиль</string>
+    <string name="entrance">Вход</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="entrance_btn_txt">Войти</string>
+    <string name="search">Поиск</string>
+    <string name="gallery">Галерея</string>
+    <string name="loading_error">Не удалось загрузить ленту\n Обновите экран или попробуйте позже</string>
+    <string name="refresh">Обновить</string>
+    <string name="enter_your_query">Введите ваш запрос</string>
+    <string name="no_results">По этому запросу нет результатов,\nпопробуйте другой запрос</string>
+    <string name="favorites">Мои избранные</string>
+    <string name="profile">Профиль</string>
+    <string name="city">Город</string>
+    <string name="phone">Телефон</string>
+    <string name="email">Почта</string>
+    <string name="exit">Выйти</string>
 </resources>
