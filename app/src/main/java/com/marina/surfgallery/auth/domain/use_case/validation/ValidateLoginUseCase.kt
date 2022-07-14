@@ -1,6 +1,6 @@
-package com.marina.surfgallery.auth.domain.use_case
+package com.marina.surfgallery.auth.domain.use_case.validation
 
-import com.marina.surfgallery.auth.domain.entity.ValidationResult
+import com.marina.surfgallery.auth.domain.entity.validation.ValidationResult
 import com.marina.surfgallery.auth.domain.util.PHONE_NUMBER_REGEX
 
 class ValidateLoginUseCase {
