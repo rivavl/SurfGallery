@@ -2,19 +2,22 @@ package com.marina.surfgallery.auth.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.marina.surfgallery.auth.domain.use_case.ValidateLoginUseCase
-import com.marina.surfgallery.auth.domain.use_case.ValidatePasswordUseCase
+import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
+import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
+import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
 
 class ViewModelFactory(
     private val validateLoginUseCase: ValidateLoginUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase
+    private val validatePasswordUseCase: ValidatePasswordUseCase,
+    private val loginUseCase: LoginUseCase
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginFragmentViewModel::class.java)) {
             return LoginFragmentViewModel(
                 validateLoginUseCase,
-                validatePasswordUseCase
+                validatePasswordUseCase,
+                loginUseCase
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
