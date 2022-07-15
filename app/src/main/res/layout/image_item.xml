@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/rv_item_image"
@@ -28,7 +29,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/heart_fill"
+        android:src="@drawable/heart_line_light"
         app:layout_constraintBottom_toBottomOf="@id/rv_item_image"
         app:layout_constraintEnd_toEndOf="@id/rv_item_image"
         app:layout_constraintHorizontal_bias="0.95"
