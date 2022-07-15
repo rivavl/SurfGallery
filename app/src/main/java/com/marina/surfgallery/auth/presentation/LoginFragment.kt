@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.marina.surfgallery.HomeFragment
+import com.marina.surfgallery.home.presentation.HomeFragment
 import com.marina.surfgallery.R
 import com.marina.surfgallery.auth.data.repository.AuthRepositoryImpl
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase

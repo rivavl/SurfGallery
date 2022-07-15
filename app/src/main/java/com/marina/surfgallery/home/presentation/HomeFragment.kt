@@ -1,4 +1,4 @@
-package com.marina.surfgallery
+package com.marina.surfgallery.home.presentation
 
 import androidx.fragment.app.Fragment
 import com.marina.surfgallery.R
