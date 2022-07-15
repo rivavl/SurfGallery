@@ -1,6 +1,7 @@
 package com.marina.surfgallery.core.data.util
 
 import com.marina.surfgallery.auth.data.remote.AuthApi
+import com.marina.surfgallery.home.data.remote.PictureApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,5 +30,8 @@ class RetrofitInstance {
             retrofit.create(AuthApi::class.java)
         }
 
+        val pictureApi by lazy {
+            retrofit.create(PictureApi::class.java)
+        }
     }
 }
