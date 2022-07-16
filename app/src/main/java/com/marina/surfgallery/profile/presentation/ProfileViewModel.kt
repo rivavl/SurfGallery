@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marina.surfgallery.auth.domain.util.Resource
+import com.marina.surfgallery.core.util.Resource
 import com.marina.surfgallery.profile.domain.use_case.GetUserInfoUseCase
 import com.marina.surfgallery.profile.presentation.entity.User
 import com.marina.surfgallery.profile.presentation.mapper.toUser

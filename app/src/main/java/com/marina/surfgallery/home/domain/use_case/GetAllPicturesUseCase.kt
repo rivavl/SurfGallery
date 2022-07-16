@@ -1,10 +1,8 @@
 package com.marina.surfgallery.home.domain.use_case
 
-import com.marina.surfgallery.auth.domain.util.Resource
-import com.marina.surfgallery.core.domain.entity.UserInfo
+import com.marina.surfgallery.core.util.Resource
 import com.marina.surfgallery.home.domain.entity.Picture
 import com.marina.surfgallery.home.domain.repository.PictureRepository
-import com.marina.surfgallery.home.presentation.mapper.toPresentation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

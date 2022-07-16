@@ -1,4 +1,4 @@
-package com.marina.surfgallery.auth.domain.util
+package com.marina.surfgallery.core.util
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : Resource<T>(data)

@@ -1,6 +1,6 @@
 package com.marina.surfgallery.profile.domain.use_case
 
-import com.marina.surfgallery.auth.domain.util.Resource
+import com.marina.surfgallery.core.util.Resource
 import com.marina.surfgallery.core.domain.entity.UserInfo
 import com.marina.surfgallery.profile.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
