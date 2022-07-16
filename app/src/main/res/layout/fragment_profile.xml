@@ -35,7 +35,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="@id/profile_fragment_image"
-        tools:text="Александра Новикова" />
+        tools:text="Александра" />
+
+    <TextView
+        android:id="@+id/profile_fragment_surname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/main_margin"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/profile_fragment_name"
+        tools:text="Новикова" />
 
     <TextView
         android:id="@+id/profile_fragment_quote"
@@ -45,7 +57,7 @@
         android:layout_marginEnd="@dimen/main_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/profile_fragment_name"
+        app:layout_constraintTop_toBottomOf="@id/profile_fragment_surname"
         tools:text="“Светлое будущее живет в вечности”" />
 
     <TextView
@@ -60,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@id/profile_fragment_image" />
 
     <TextView
-        android:id="@+id/city_name"
+        android:id="@+id/profile_fragment_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin"
@@ -84,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
     <TextView
-        android:id="@+id/phone_number"
+        android:id="@+id/profile_fragment_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin"
@@ -108,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider2" />
 
     <TextView
-        android:id="@+id/email_address"
+        android:id="@+id/profile_fragment_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/main_margin"
@@ -135,7 +147,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city_name" />
+        app:layout_constraintTop_toBottomOf="@id/profile_fragment_city" />
 
     <View
         android:id="@+id/divider2"
@@ -145,7 +157,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phone_number" />
+        app:layout_constraintTop_toBottomOf="@id/profile_fragment_phone" />
 
     <View
         android:id="@+id/divider3"
@@ -155,7 +167,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_address" />
+        app:layout_constraintTop_toBottomOf="@id/profile_fragment_email" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
