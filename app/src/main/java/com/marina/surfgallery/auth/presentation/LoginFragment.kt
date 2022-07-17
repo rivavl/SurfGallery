@@ -6,14 +6,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.marina.surfgallery.home.presentation.HomeFragment
 import com.marina.surfgallery.R
 import com.marina.surfgallery.auth.data.repository.AuthRepositoryImpl
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
-import com.marina.surfgallery.core.data.SharedPrefsHelper
+import com.marina.surfgallery.common.SharedPrefsHelper
 import com.marina.surfgallery.databinding.FragmentLoginBinding
 import com.marina.surfgallery.profile.presentation.ProfileFragment
 

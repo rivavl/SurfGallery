@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
-import com.marina.surfgallery.core.util.Resource
-import com.marina.surfgallery.core.data.SharedPrefsHelper
+import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.SharedPrefsHelper
 import com.marina.surfgallery.databinding.FragmentProfileBinding
 import com.marina.surfgallery.profile.ProfileViewModelFactory
 import com.marina.surfgallery.profile.data.repository.ProfileRepositoryImpl

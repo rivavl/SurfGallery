@@ -3,9 +3,9 @@ package com.marina.surfgallery.auth.data.repository
 import com.marina.surfgallery.auth.data.mappers.toUserInfo
 import com.marina.surfgallery.auth.data.remote.entity.request.LoginRequestBody
 import com.marina.surfgallery.auth.domain.repository.AuthRepository
-import com.marina.surfgallery.core.data.DataSourceHelper
-import com.marina.surfgallery.core.data.util.RetrofitInstance
-import com.marina.surfgallery.core.domain.entity.UserInfo
+import com.marina.surfgallery.common.DataSourceHelper
+import com.marina.surfgallery.common.RetrofitInstance
+import com.marina.surfgallery.common.UserInfo
 
 class AuthRepositoryImpl(
 //    private val api: AuthApi

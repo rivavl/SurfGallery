@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
-import com.marina.surfgallery.core.util.Resource
+import com.marina.surfgallery.common.Resource
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
 import kotlinx.coroutines.launch
 
