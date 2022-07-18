@@ -1,4 +1,4 @@
-package com.marina.surfgallery.core.presentation
+package com.marina.surfgallery.core.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -10,10 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
 import com.marina.surfgallery.common.SharedPrefsHelper
-import com.marina.surfgallery.databinding.FragmentHomeBinding
+import com.marina.surfgallery.core.data.local.db.AppDatabase
+import com.marina.surfgallery.core.data.local.file.SavePictureInFile
 import com.marina.surfgallery.core.data.repository.PictureRepositoryImpl
+import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
 import com.marina.surfgallery.core.domain.use_case.GetAllPicturesUseCase
-import com.marina.surfgallery.core.presentation.recycler_view.PicturesListAdapter
+import com.marina.surfgallery.core.domain.use_case.SaveBitmapUseCase
+import com.marina.surfgallery.core.domain.use_case.SavePictureInfoUseCase
+import com.marina.surfgallery.core.presentation.HomeViewModelFactory
+import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
+import com.marina.surfgallery.core.presentation.view_model.HomeFragmentViewModel
+import com.marina.surfgallery.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -32,11 +39,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val sp = requireContext().getSharedPreferences("1234567890", Context.MODE_PRIVATE)
         val dataSource = SharedPrefsHelper(sp)
-        val repository = PictureRepositoryImpl(dataSource)
+        val saver = SavePictureInFile(requireActivity().application)
+        val database = AppDatabase.getInstance(requireActivity().application)
+        val repository = PictureRepositoryImpl(database, dataSource, saver)
         val useCase = GetAllPicturesUseCase(repository)
+        val delUseCase = DeletePictureUseCase(repository)
+        val saveBitmapUseCase = SaveBitmapUseCase(repository)
+        val savePictureInfoUseCase = SavePictureInfoUseCase(repository)
         viewModel = ViewModelProvider(
             this,
-            HomeViewModelFactory(useCase)
+            HomeViewModelFactory(useCase, delUseCase, saveBitmapUseCase, savePictureInfoUseCase)
         )[HomeFragmentViewModel::class.java]
 
         viewModel.picturesList.observe(viewLifecycleOwner) {
@@ -50,6 +62,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         recyclerView.apply {
             adapter = picturesListAdapter
             layoutManager = GridLayoutManager(activity, 2)
+        }
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        picturesListAdapter.onPictureItemClickListenerSave = { pic, bitmap ->
+            pic.isFavorite = true
+            viewModel.savePicture(pic)
+            viewModel.saveBitmap(bitmap, pic.photoUrl)
+        }
+
+        picturesListAdapter.onPictureItemClickListenerDelete = {
+            it.isFavorite = false
+            viewModel.deletePicture(it)
         }
     }
 }
