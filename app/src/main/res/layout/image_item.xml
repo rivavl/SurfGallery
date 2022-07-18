@@ -27,9 +27,23 @@
         tools:text="Самый милый корги" />
 
     <ImageView
+        android:id="@+id/rv_heart_outline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/heart_line_light"
+        app:layout_constraintBottom_toBottomOf="@id/rv_item_image"
+        app:layout_constraintEnd_toEndOf="@id/rv_item_image"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@id/rv_item_image"
+        app:layout_constraintTop_toTopOf="@id/rv_item_image"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <ImageView
+        android:id="@+id/rv_heart_fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/heart_fill"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/rv_item_image"
         app:layout_constraintEnd_toEndOf="@id/rv_item_image"
         app:layout_constraintHorizontal_bias="0.95"
