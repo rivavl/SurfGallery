@@ -13,8 +13,10 @@ import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCa
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
 import com.marina.surfgallery.common.SharedPrefsHelper
+import com.marina.surfgallery.core.presentation.fragment.FavoriteFragment
+import com.marina.surfgallery.core.presentation.fragment.HomeFragment
+import com.marina.surfgallery.core.presentation.fragment.SearchFragment
 import com.marina.surfgallery.databinding.FragmentLoginBinding
-import com.marina.surfgallery.profile.presentation.ProfileFragment
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -70,7 +72,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.isValidToken.observe(viewLifecycleOwner) {
             if (it) {
                 requireActivity().supportFragmentManager
-                    .beginTransaction().replace(R.id.container, ProfileFragment())
+                    .beginTransaction().replace(R.id.container, SearchFragment())
                     .commit()
             }
         }

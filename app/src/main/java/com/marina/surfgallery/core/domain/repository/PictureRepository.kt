@@ -14,4 +14,6 @@ interface PictureRepository {
     suspend fun getFavoritePictures(): List<Picture>
 
     suspend fun deletePicture(id: String, name: String)
+
+    suspend fun getFilteredPictures(query: String): List<Picture>
 }

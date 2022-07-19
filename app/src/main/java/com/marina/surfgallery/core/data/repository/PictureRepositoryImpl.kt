@@ -59,4 +59,8 @@ class PictureRepositoryImpl(
         saveHelper.deletePicture(nameInDb)
         dao.deletePicture(id)
     }
+
+    override suspend fun getFilteredPictures(query: String): List<Picture> {
+        return getPictures().filter { it.title.contains(query) }
+    }
 }
