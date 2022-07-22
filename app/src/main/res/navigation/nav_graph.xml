@@ -7,5 +7,33 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.marina.surfgallery.auth.presentation.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.marina.surfgallery.core.presentation.fragment.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.marina.surfgallery.core.presentation.fragment.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.marina.surfgallery.profile.presentation.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.marina.surfgallery.core.presentation.fragment.FavoriteFragment"
+        android:label="FavoriteFragment" />
 </navigation>

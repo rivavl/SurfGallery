@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
 import com.marina.surfgallery.auth.data.repository.AuthRepositoryImpl
@@ -13,8 +14,6 @@ import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCa
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
 import com.marina.surfgallery.common.SharedPrefsHelper
-import com.marina.surfgallery.core.presentation.fragment.FavoriteFragment
-import com.marina.surfgallery.core.presentation.fragment.HomeFragment
 import com.marina.surfgallery.core.presentation.fragment.SearchFragment
 import com.marina.surfgallery.databinding.FragmentLoginBinding
 
@@ -71,9 +70,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         viewModel.isValidToken.observe(viewLifecycleOwner) {
             if (it) {
-                requireActivity().supportFragmentManager
-                    .beginTransaction().replace(R.id.container, SearchFragment())
-                    .commit()
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
     }

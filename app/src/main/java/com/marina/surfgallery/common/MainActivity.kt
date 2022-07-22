@@ -4,12 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
-import com.marina.surfgallery.core.presentation.fragment.FavoriteFragment
-import com.marina.surfgallery.core.presentation.fragment.HomeFragment
-import com.marina.surfgallery.profile.presentation.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,21 +21,22 @@ class MainActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_main)
 
+
 //        launchFragment(LoginFragment())
         findViewById<BottomNavigationView>(R.id.bottom_nav_bar).setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_main -> {
-                    launchFragment(HomeFragment())
+                    launchFragment(R.id.homeFragment)
                     true
                 }
 
                 R.id.menu_favorite -> {
-                    launchFragment(FavoriteFragment())
+                    launchFragment(R.id.favoriteFragment)
                     true
                 }
 
                 R.id.menu_profile -> {
-                    launchFragment(ProfileFragment())
+                    launchFragment(R.id.profileFragment)
                     true
                 }
                 else -> {
@@ -48,9 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun launchFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .commit()
+    private fun launchFragment(id: Int) {
+        this.findNavController(R.id.nav_host_fragment).navigate(id)
     }
 }
