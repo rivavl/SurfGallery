@@ -9,7 +9,7 @@ class ValidatePasswordUseCase {
 
         if (password.isBlank()) {
             return ValidationResult(
-                successful = false,
+                isSuccessful = false,
                 errorMessage = "Поле не может быть пустым",
                 isBlank = true
             )
@@ -17,14 +17,14 @@ class ValidatePasswordUseCase {
 
         if (!PASSWORD_REGEX.toRegex().matches(password)) {
             return ValidationResult(
-                successful = false,
+                isSuccessful = false,
                 errorMessage = "Неверный пароль",
                 isBlank = false
             )
         }
 
         return ValidationResult(
-            successful = true
+            isSuccessful = true
         )
     }
 

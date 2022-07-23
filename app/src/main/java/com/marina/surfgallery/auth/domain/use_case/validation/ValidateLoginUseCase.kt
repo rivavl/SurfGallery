@@ -9,7 +9,7 @@ class ValidateLoginUseCase {
 
         if (phoneNumber.isBlank()) {
             return ValidationResult(
-                successful = false,
+                isSuccessful = false,
                 errorMessage = "Поле не может быть пустым",
                 isBlank = true
             )
@@ -17,14 +17,14 @@ class ValidateLoginUseCase {
 
         if (!PHONE_NUMBER_REGEX.toRegex().matches(phoneNumber)) {
             return ValidationResult(
-                successful = false,
+                isSuccessful = false,
                 errorMessage = "Неверный логин",
                 isBlank = false
             )
         }
 
         return ValidationResult(
-            successful = true
+            isSuccessful = true
         )
     }
 }

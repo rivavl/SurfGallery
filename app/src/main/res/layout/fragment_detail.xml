@@ -6,23 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/arrow_back_iv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/main_margin"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/arrow_right_line"
+        app:layout_constraintBottom_toBottomOf="@id/title_tv"
+        app:layout_constraintEnd_toStartOf="@id/title_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/toolbar_menu"
-        app:title="@string/gallery" />
+        app:layout_constraintTop_toTopOf="@id/title_tv" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/gallery"
+        android:textAppearance="@style/Text.SemiBold.24"
+        app:layout_constraintStart_toEndOf="@id/arrow_back_iv"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/title_tv">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,32 +44,48 @@
                 android:id="@+id/post_fragment_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_launcher_foreground" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/post_fragment_title"
+                    style="@style/Text.Medium.16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     tools:text="Заголовок" />
 
                 <TextView
                     android:id="@+id/post_fragment_date"
+                    style="@style/Text.Medium.10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end" />
+                    android:layout_marginEnd="16dp"
+                    android:gravity="end"
+                    android:textColor="@color/light_gray_date"
+                    tools:text="12.05.2022" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/post_fragment_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textAppearance="@style/Text.Regular.12"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="10dp"
+                tools:text="Для бариста и посетителей кофеен специальные кружки для кофе — это ещё один способ проконтролировать вкус напитка и приготовить его именно так, как нравится вам.
+
+Теперь, кроме регулировки экстракции, настройки помола, времени заваривания и многого что помогает выделять нужные характеристики кофе, вы сможете выбрать и кружку для кофе в зависимости от сорта." />
         </LinearLayout>
 
     </ScrollView>

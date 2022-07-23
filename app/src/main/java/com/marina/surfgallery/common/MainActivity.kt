@@ -7,6 +7,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +22,6 @@ class MainActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_main)
 
-
-//        launchFragment(LoginFragment())
         findViewById<BottomNavigationView>(R.id.bottom_nav_bar).setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_main -> {

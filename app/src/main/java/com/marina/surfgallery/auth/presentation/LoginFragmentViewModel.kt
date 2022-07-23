@@ -53,7 +53,7 @@ class LoginFragmentViewModel(
 
     private fun checkLogin(login: String) {
         val resultLogin = validateLoginUseCase(login)
-        when (resultLogin.successful) {
+        when (resultLogin.isSuccessful) {
             true -> {
                 _loginState.postValue(FieldsState.Success(login = login))
                 isValid = true
@@ -67,7 +67,7 @@ class LoginFragmentViewModel(
 
     private fun checkPassword(password: String) {
         val resultPassword = validatePasswordUseCase(password)
-        when (resultPassword.successful) {
+        when (resultPassword.isSuccessful) {
             true -> {
                 if (isValid) {
                     _passwordState.postValue(FieldsState.Success(password = password))
