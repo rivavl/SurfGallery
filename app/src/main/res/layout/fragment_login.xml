@@ -4,74 +4,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/main_margin"
-        app:layout_constraintBottom_toTopOf="@id/text_layout_login"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/entrance"
+        android:textAppearance="@style/Text.SemiBold.24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/entrance" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_layout_login"
+        android:id="@+id/login_til"
+        style="@style/DefaultTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/main_margin"
-        android:layout_marginEnd="@dimen/main_margin"
-        app:boxCornerRadiusTopEnd="@dimen/corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/corner_radius"
-        app:layout_constraintBottom_toTopOf="@id/text_layout_password"
+        android:layout_marginHorizontal="@dimen/main_margin"
+        android:layout_marginTop="45dp"
+        android:hint="@string/login"
+        app:layout_constraintBottom_toTopOf="@id/password_til"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/title">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_login"
+            android:id="@+id/login_edt"
+            style="@style/DefaultTextInputEditText"
+            android:inputType="number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login" />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text_layout_password"
+        android:id="@+id/password_til"
+        style="@style/DefaultTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/main_margin"
+        android:layout_marginHorizontal="@dimen/main_margin"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="@dimen/main_margin"
-        app:boxCornerRadiusTopEnd="@dimen/corner_radius"
-        app:boxCornerRadiusTopStart="@dimen/corner_radius"
+        android:hint="@string/password"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_layout_login">
+        app:layout_constraintTop_toBottomOf="@id/login_til"
+        app:passwordToggleDrawable="@drawable/ic_password_selector">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password"
+            android:id="@+id/password_edt"
+            style="@style/DefaultTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
         android:src="@drawable/surf_edu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/enter_button"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.marina.surfgallery.common.LoaderButton
         android:id="@+id/enter_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/main_margin"
-        android:text="@string/entrance_btn_txt"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/main_margin"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:textBtn="@string/entrance_btn_txt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
