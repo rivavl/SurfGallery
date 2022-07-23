@@ -19,4 +19,35 @@
     <style name="DefaultTextInputEditText">
         <item name="android:textAppearance">@style/Text.Medium.16</item>
     </style>
+
+    <style name="MaterialSnackbarTheme" parent="@style/Widget.MaterialComponents.Snackbar">
+        <item name="android:background">@color/errorColor</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="MaterialSnackbarTextViewTheme" parent="@style/Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">@style/Text.Medium.14</item>
+    </style>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

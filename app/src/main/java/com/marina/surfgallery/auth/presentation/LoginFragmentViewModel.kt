@@ -1,5 +1,6 @@
 package com.marina.surfgallery.auth.presentation
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
-import com.marina.surfgallery.common.Resource
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
+import com.marina.surfgallery.common.Resource
 import kotlinx.coroutines.launch
 
 class LoginFragmentViewModel(
@@ -28,11 +29,18 @@ class LoginFragmentViewModel(
     private val _isValidToken = MutableLiveData<Boolean>()
     val isValidToken: LiveData<Boolean> get() = _isValidToken
 
+    private var phoneFromField = ""
 
-    fun checkLoginAndPassword(login: String, password: String) = viewModelScope.launch {
-        checkLogin(login)
+    fun setLogin(login: String) {
+        phoneFromField = "+7$login"
+    }
+
+
+    fun checkLoginData(password: String) = viewModelScope.launch {
+        Log.e("checkLoginData", phoneFromField)
+        checkLogin(phoneFromField)
         checkPassword(password)
-        loginUseCase(login, password).collect {
+        loginUseCase(phoneFromField, password).collect {
             when (it) {
                 is Resource.Success -> {
                     _isValidToken.postValue(true)

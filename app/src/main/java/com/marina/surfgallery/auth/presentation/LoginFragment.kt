@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.marina.surfgallery.R
 import com.marina.surfgallery.auth.data.repository.AuthRepositoryImpl
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
@@ -14,8 +15,9 @@ import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCa
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
 import com.marina.surfgallery.common.SharedPrefsHelper
-import com.marina.surfgallery.core.presentation.fragment.SearchFragment
 import com.marina.surfgallery.databinding.FragmentLoginBinding
+import com.redmadrobot.inputmask.MaskedTextChangedListener
+import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -25,6 +27,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initBinding(view)
+        initLoginMask()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
             View.GONE
 
@@ -41,6 +44,23 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         subscribeOnLiveData()
         setOnClickListener()
+
+    }
+
+    private fun initLoginMask() {
+        installOn(
+            binding.loginEdt,
+            PHONE_MASK,
+            object : MaskedTextChangedListener.ValueListener {
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String
+                ) {
+                    viewModel.setLogin(extractedValue)
+                }
+            }
+        )
     }
 
     private fun initBinding(view: View) {
@@ -77,10 +97,21 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun setOnClickListener() {
         binding.enterButton.setOnClickListener {
-            val login = binding.loginEdt.text.toString()
             val password = binding.passwordEdt.text.toString()
-            viewModel.checkLoginAndPassword(login, password)
+            viewModel.checkLoginData(password)
+            showSnackbar("112121212")
         }
     }
 
+    private fun showSnackbar(info: String) {
+        Snackbar.make(
+            binding.root,
+            info,
+            Snackbar.LENGTH_LONG
+        ).setAnchorView(binding.enterButton).show()
+    }
+
+    companion object {
+        private const val PHONE_MASK = "+7 ([000]) [000] [00] [00]"
+    }
 }
