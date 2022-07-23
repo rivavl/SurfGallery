@@ -45,15 +45,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun initBinding(view: View) {
         binding = FragmentLoginBinding.bind(view)
-        binding.textLayoutLogin.errorIconDrawable = null
-        binding.textLayoutPassword.errorIconDrawable = null
+        binding.loginTil.errorIconDrawable = null
+        binding.passwordTil.errorIconDrawable = null
     }
 
     private fun subscribeOnLiveData() {
         viewModel.loginState.observe(viewLifecycleOwner) {
             when (it) {
                 is FieldsState.LoginError -> {
-                    binding.textLayoutLogin.error = it.message
+                    binding.loginTil.error = it.message
                 }
                 else -> {}
             }
@@ -62,7 +62,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         viewModel.passwordState.observe(viewLifecycleOwner) {
             when (it) {
                 is FieldsState.PasswordError -> {
-                    binding.textLayoutPassword.error = it.message
+                    binding.passwordTil.error = it.message
                 }
                 else -> {}
             }
@@ -77,8 +77,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun setOnClickListener() {
         binding.enterButton.setOnClickListener {
-            val login = binding.etLogin.text.toString()
-            val password = binding.etPassword.text.toString()
+            val login = binding.loginEdt.text.toString()
+            val password = binding.passwordEdt.text.toString()
             viewModel.checkLoginAndPassword(login, password)
         }
     }
