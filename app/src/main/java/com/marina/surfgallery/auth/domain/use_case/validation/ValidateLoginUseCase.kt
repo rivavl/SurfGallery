@@ -2,8 +2,9 @@ package com.marina.surfgallery.auth.domain.use_case.validation
 
 import com.marina.surfgallery.auth.domain.entity.validation.ValidationResult
 import com.marina.surfgallery.auth.domain.util.PHONE_NUMBER_REGEX
+import javax.inject.Inject
 
-class ValidateLoginUseCase {
+class ValidateLoginUseCase @Inject constructor() {
 
     operator fun invoke(phoneNumber: String): ValidationResult {
 

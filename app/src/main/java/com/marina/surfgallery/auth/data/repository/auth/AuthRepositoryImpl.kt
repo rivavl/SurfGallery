@@ -1,24 +1,26 @@
 package com.marina.surfgallery.auth.data.repository.auth
 
+import com.marina.surfgallery.auth.data.local.AuthDao
 import com.marina.surfgallery.auth.data.mappers.toUserInfo
+import com.marina.surfgallery.auth.data.remote.AuthApi
 import com.marina.surfgallery.auth.data.remote.entity.request.LoginRequestBody
 import com.marina.surfgallery.auth.domain.repository.AuthRepository
 import com.marina.surfgallery.common.*
+import com.marina.surfgallery.common.entity.Result
+import com.marina.surfgallery.common.entity.UserInfo
 import com.marina.surfgallery.core.data.local.file.SavePictureInStorage
+import javax.inject.Inject
 
-class AuthRepositoryImpl(
-//    private val api: AuthApi
+class AuthRepositoryImpl @Inject constructor(
+    private val api: AuthApi,
     private val dataSourceHelper: DataSourceHelper,
-//    private val authDao: AuthDao
-    private val database: AppDatabase,
+    private val authDao: AuthDao,
     private val saveHelper: SavePictureInStorage
 ) : AuthRepository {
 
-    val dao = database.authDao()
-
     override suspend fun login(login: String, password: String): Result {
         val body = LoginRequestBody(phone = login, password = password)
-        val response = RetrofitInstance.authApi.login(body)
+        val response = api.login(body)
         val result: Result
         if (response.isSuccessful) {
             val loginResponse = response.body()!!
@@ -41,7 +43,7 @@ class AuthRepositoryImpl(
 
     override suspend fun logout() {
         dataSourceHelper.deleteUserInfo()
-        dao.dropTable()
+        authDao.dropTable()
         saveHelper.deleteAllPictures()
     }
 }

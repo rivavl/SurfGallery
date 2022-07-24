@@ -2,9 +2,11 @@ package com.marina.surfgallery.common
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.marina.surfgallery.common.entity.UserInfo
+import javax.inject.Inject
 
 
-class SharedPrefsHelper(
+class SharedPrefsHelper @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : DataSourceHelper {
 

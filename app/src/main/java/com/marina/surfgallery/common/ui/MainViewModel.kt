@@ -1,4 +1,4 @@
-package com.marina.surfgallery.common
+package com.marina.surfgallery.common.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

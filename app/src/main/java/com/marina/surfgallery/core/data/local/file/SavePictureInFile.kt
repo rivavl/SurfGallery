@@ -6,16 +6,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
 import java.io.IOException
+import javax.inject.Inject
 
 
-class SavePictureInFile(
+class SavePictureInFile @Inject constructor(
     private val context: Application
 ) : SavePictureInStorage {
 
-    override suspend fun savePicture(pic: InternalStoragePicture) {
+    override suspend fun savePicture(picture: InternalStoragePicture) {
         try {
-            context.openFileOutput(pic.name, MODE_PRIVATE).use { stream ->
-                if (!pic.bmp.compress(Bitmap.CompressFormat.JPEG, 95, stream)) {
+            context.openFileOutput(picture.name, MODE_PRIVATE).use { stream ->
+                if (!picture.bmp.compress(Bitmap.CompressFormat.JPEG, 95, stream)) {
                     throw IOException("Couldn't save bitmap.")
                 }
             }

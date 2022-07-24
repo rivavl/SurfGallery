@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.entity.Resource
 import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
 import com.marina.surfgallery.core.domain.use_case.GetFilteredPicturesUseCase
 import com.marina.surfgallery.core.domain.use_case.SaveBitmapUseCase
@@ -15,8 +15,9 @@ import com.marina.surfgallery.core.presentation.mapper.toPicture
 import com.marina.surfgallery.core.presentation.mapper.toPresentation
 import com.marina.surfgallery.core.presentation.util.SearchResult
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchFragmentViewModel(
+class SearchFragmentViewModel @Inject constructor(
     private val getFilteredPicturesUseCase: GetFilteredPicturesUseCase,
     private val saveBitmapUseCase: SaveBitmapUseCase,
     private val savePictureInfoUseCase: SavePictureInfoUseCase,

@@ -1,13 +1,15 @@
 package com.marina.surfgallery.auth.domain.use_case.request
 
 import com.marina.surfgallery.auth.domain.repository.AuthRepository
-import com.marina.surfgallery.common.Resource
-import com.marina.surfgallery.common.Result.*
+import com.marina.surfgallery.common.entity.Resource
+import com.marina.surfgallery.common.entity.Result.ERROR
+import com.marina.surfgallery.common.entity.Result.SUCCESS
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
+import javax.inject.Inject
 
-class LoginUseCase(
+class LoginUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
 
@@ -15,7 +17,7 @@ class LoginUseCase(
         try {
             emit(Resource.Loading())
             val userInfo = repository.login(login, password)
-            when(userInfo) {
+            when (userInfo) {
                 SUCCESS -> emit(Resource.Success(Unit))
                 ERROR -> emit(Resource.Error("Логин или пароль введен неправильно"))
             }

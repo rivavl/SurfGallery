@@ -1,7 +1,7 @@
 package com.marina.surfgallery.auth.data.mappers
 
 import com.marina.surfgallery.auth.data.remote.entity.response.UserDto
-import com.marina.surfgallery.common.UserInfo
+import com.marina.surfgallery.common.entity.UserInfo
 
 /*
 * Маппер data -> domain

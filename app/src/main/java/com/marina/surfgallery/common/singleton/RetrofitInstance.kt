@@ -1,4 +1,4 @@
-package com.marina.surfgallery.common
+package com.marina.surfgallery.common.singleton
 
 import com.marina.surfgallery.auth.data.remote.AuthApi
 import com.marina.surfgallery.core.data.remote.PictureApi

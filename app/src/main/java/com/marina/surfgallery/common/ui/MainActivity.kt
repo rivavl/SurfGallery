@@ -1,4 +1,4 @@
-package com.marina.surfgallery.common
+package com.marina.surfgallery.common.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -11,15 +11,16 @@ import com.marina.surfgallery.R
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_main)
         installSplashScreen().apply {
             setKeepOnScreenCondition {
                 viewModel.isLoading.value == true
             }
         }
-        setContentView(R.layout.activity_main)
+
 
         findViewById<BottomNavigationView>(R.id.bottom_nav_bar).setOnItemSelectedListener {
             when (it.itemId) {

@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.marina.surfgallery.core.presentation.entity.PictureItem
+import javax.inject.Inject
 
-class DetailFragmentViewModel : ViewModel() {
+class DetailFragmentViewModel @Inject constructor() : ViewModel() {
 
     private var _picture = MutableLiveData<PictureItem>()
 

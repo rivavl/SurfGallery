@@ -1,4 +1,4 @@
-package com.marina.surfgallery.common
+package com.marina.surfgallery.common.entity
 
 enum class Result {
     SUCCESS,

@@ -2,8 +2,9 @@ package com.marina.surfgallery.core.domain.use_case
 
 import com.marina.surfgallery.core.domain.entity.Picture
 import com.marina.surfgallery.core.domain.repository.PictureRepository
+import javax.inject.Inject
 
-class SavePictureInfoUseCase(
+class SavePictureInfoUseCase @Inject constructor(
     private val repository: PictureRepository
 ) {
 

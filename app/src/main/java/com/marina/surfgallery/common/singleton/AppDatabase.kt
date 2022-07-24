@@ -1,4 +1,4 @@
-package com.marina.surfgallery.common
+package com.marina.surfgallery.common.singleton
 
 import android.app.Application
 import androidx.room.Database

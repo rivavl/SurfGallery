@@ -4,14 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.entity.Resource
 import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
 import com.marina.surfgallery.core.domain.use_case.GetFavoritePicturesUseCase
 import com.marina.surfgallery.core.presentation.entity.PictureItem
 import com.marina.surfgallery.core.presentation.mapper.toPresentation
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavoriteFragmentViewModel(
+class FavoriteFragmentViewModel @Inject constructor(
     private val deletePictureUseCase: DeletePictureUseCase,
     private val getFavoritePicturesUseCase: GetFavoritePicturesUseCase
 ) : ViewModel() {

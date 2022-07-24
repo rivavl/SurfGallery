@@ -8,11 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.marina.surfgallery.auth.domain.use_case.profile.GetUserInfoUseCase
 import com.marina.surfgallery.auth.domain.use_case.profile.LogoutUseCase
 import com.marina.surfgallery.auth.presentation.entity.User
-import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.entity.Resource
 import com.marina.surfgallery.profile.presentation.mapper.toUser
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel(
+class ProfileFragmentViewModel @Inject constructor(
     private val getUserInfoUseCase: GetUserInfoUseCase,
     private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {

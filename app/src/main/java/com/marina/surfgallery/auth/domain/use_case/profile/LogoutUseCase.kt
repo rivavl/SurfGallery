@@ -1,12 +1,13 @@
 package com.marina.surfgallery.auth.domain.use_case.profile
 
 import com.marina.surfgallery.auth.domain.repository.AuthRepository
-import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.entity.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
+import javax.inject.Inject
 
-class LogoutUseCase(
+class LogoutUseCase @Inject constructor(
     private val repository: AuthRepository
 ) {
 

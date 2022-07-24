@@ -12,20 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
-import com.marina.surfgallery.common.AppDatabase
-import com.marina.surfgallery.common.Constants
-import com.marina.surfgallery.common.SharedPrefsHelper
-import com.marina.surfgallery.core.data.local.file.SavePictureInFile
-import com.marina.surfgallery.core.data.repository.PictureRepositoryImpl
-import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
-import com.marina.surfgallery.core.domain.use_case.GetFilteredPicturesUseCase
-import com.marina.surfgallery.core.domain.use_case.SaveBitmapUseCase
-import com.marina.surfgallery.core.domain.use_case.SavePictureInfoUseCase
-import com.marina.surfgallery.core.presentation.SearchViewModelFactory
+import com.marina.surfgallery.app.App
+import com.marina.surfgallery.core.presentation.ViewModelFactoryCore
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
 import com.marina.surfgallery.core.presentation.util.SearchResult
 import com.marina.surfgallery.core.presentation.view_model.SearchFragmentViewModel
 import com.marina.surfgallery.databinding.FragmentSearchBinding
+import javax.inject.Inject
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
@@ -34,28 +27,25 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private lateinit var picturesListAdapter: PicturesListAdapter
     private lateinit var viewModel: SearchFragmentViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactoryCore
+
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SearchFragmentViewModel::class.java]
         binding = FragmentSearchBinding.bind(view)
         requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
             View.VISIBLE
         setupRecyclerView()
-
-        val sp =
-            requireContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
-        val dataSource = SharedPrefsHelper(sp)
-        val saver = SavePictureInFile(requireActivity().application)
-        val database = AppDatabase.getInstance(requireActivity().application)
-        val repository = PictureRepositoryImpl(database, dataSource, saver)
-        val delUseCase = DeletePictureUseCase(repository)
-        val saveBitmapUseCase = SaveBitmapUseCase(repository)
-        val savePictureInfoUseCase = SavePictureInfoUseCase(repository)
-        val filtered = GetFilteredPicturesUseCase(repository)
-        viewModel = ViewModelProvider(
-            this,
-            SearchViewModelFactory(filtered, saveBitmapUseCase, savePictureInfoUseCase, delUseCase)
-        )[SearchFragmentViewModel::class.java]
 
         viewModel.picturesList.observe(viewLifecycleOwner) {
             Log.e("setOnQueryTextListener observe", it.toString())
@@ -66,8 +56,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     enterYourQuery(false)
                     setRVVisibility(true)
                 }
-                is SearchResult.Loading -> {}
-                is SearchResult.Error -> {}
                 is SearchResult.NoResults -> {
                     noResults(true)
                     enterYourQuery(false)

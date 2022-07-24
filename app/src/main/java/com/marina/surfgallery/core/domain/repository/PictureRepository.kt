@@ -1,7 +1,7 @@
 package com.marina.surfgallery.core.domain.repository
 
 import android.graphics.Bitmap
-import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.entity.Resource
 import com.marina.surfgallery.core.domain.entity.Picture
 
 interface PictureRepository {

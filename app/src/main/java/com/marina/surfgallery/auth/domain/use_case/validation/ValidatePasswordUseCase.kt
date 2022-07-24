@@ -2,8 +2,9 @@ package com.marina.surfgallery.auth.domain.use_case.validation
 
 import com.marina.surfgallery.auth.domain.entity.validation.ValidationResult
 import com.marina.surfgallery.auth.domain.util.PASSWORD_REGEX
+import javax.inject.Inject
 
-class ValidatePasswordUseCase {
+class ValidatePasswordUseCase @Inject constructor() {
 
     operator fun invoke(password: String): ValidationResult {
 

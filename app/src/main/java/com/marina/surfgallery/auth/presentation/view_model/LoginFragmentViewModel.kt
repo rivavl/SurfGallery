@@ -9,10 +9,11 @@ import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
-import com.marina.surfgallery.common.Resource
+import com.marina.surfgallery.common.entity.Resource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginFragmentViewModel(
+class LoginFragmentViewModel @Inject constructor(
     private val validateLoginUseCase: ValidateLoginUseCase,
     private val validatePasswordUseCase: ValidatePasswordUseCase,
     private val loginUseCase: LoginUseCase
