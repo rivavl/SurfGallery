@@ -2,17 +2,19 @@ package com.marina.surfgallery.core.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
-import com.marina.surfgallery.common.SharedPrefsHelper
 import com.marina.surfgallery.common.AppDatabase
 import com.marina.surfgallery.common.Constants
+import com.marina.surfgallery.common.SharedPrefsHelper
 import com.marina.surfgallery.core.data.local.file.SavePictureInFile
 import com.marina.surfgallery.core.data.repository.PictureRepositoryImpl
 import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
@@ -21,9 +23,9 @@ import com.marina.surfgallery.core.domain.use_case.SaveBitmapUseCase
 import com.marina.surfgallery.core.domain.use_case.SavePictureInfoUseCase
 import com.marina.surfgallery.core.presentation.SearchViewModelFactory
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
+import com.marina.surfgallery.core.presentation.util.SearchResult
 import com.marina.surfgallery.core.presentation.view_model.SearchFragmentViewModel
 import com.marina.surfgallery.databinding.FragmentSearchBinding
-import java.util.*
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
@@ -40,7 +42,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             View.VISIBLE
         setupRecyclerView()
 
-        val sp = requireContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+        val sp =
+            requireContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
         val dataSource = SharedPrefsHelper(sp)
         val saver = SavePictureInFile(requireActivity().application)
         val database = AppDatabase.getInstance(requireActivity().application)
@@ -55,28 +58,66 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         )[SearchFragmentViewModel::class.java]
 
         viewModel.picturesList.observe(viewLifecycleOwner) {
-            picturesListAdapter.submitList(it.data)
+            Log.e("setOnQueryTextListener observe", it.toString())
+            when (it) {
+                is SearchResult.Success -> {
+                    picturesListAdapter.submitList(it.data)
+                    noResults(false)
+                    enterYourQuery(false)
+                    setRVVisibility(true)
+                }
+                is SearchResult.Loading -> {}
+                is SearchResult.Error -> {}
+                is SearchResult.NoResults -> {
+                    noResults(true)
+                    enterYourQuery(false)
+                    setRVVisibility(false)
+                }
+                is SearchResult.IsEmpty -> {
+                    noResults(false)
+                    enterYourQuery(true)
+                    setRVVisibility(false)
+                }
+                else -> {}
+            }
         }
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-//                if (query?.isNotEmpty() == true) {
-//                    viewModel.getPictures(query.lowercase(Locale.getDefault()))
-//                    binding.searchRv.visibility = View.VISIBLE
-//                    binding.searchFragmentEnterQuery.visibility = View.GONE
-//                }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText?.isNotEmpty() == true) {
-                    viewModel.getPictures(newText)
+                Log.e("setOnQueryTextListener query", query.toString())
+                if (query?.isNotEmpty() == true) {
+                    viewModel.getPictures(query)
                     binding.searchRv.visibility = View.VISIBLE
                     binding.searchFragmentEnterQuery.visibility = View.GONE
+                } else {
+                    viewModel.clearPics()
                 }
                 return false
             }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.e("setOnQueryTextListener newText", newText.toString())
+                if (newText?.isNotEmpty() == true) {
+                    viewModel.getPictures(newText)
+                    binding.searchRv.visibility = View.VISIBLE
+                    binding.searchFragmentEnterQuery.visibility = View.GONE
+                } else {
+                    viewModel.clearPics()
+                }
+                return false
+            }
         })
+    }
+
+    private fun enterYourQuery(isVisible: Boolean) {
+        binding.searchFragmentEnterQuery.isVisible = isVisible
+    }
+
+    private fun setRVVisibility(isVisible: Boolean) {
+        binding.searchRv.isVisible = isVisible
+    }
+
+    private fun noResults(isVisible: Boolean) {
+        binding.searchFragmentNoResults.isVisible = isVisible
     }
 
     private fun setupRecyclerView() {
