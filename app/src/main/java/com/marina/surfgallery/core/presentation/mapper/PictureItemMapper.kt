@@ -10,7 +10,7 @@ fun List<Picture>.toPresentation(): List<PictureItem> {
             title = it.title,
             content = it.content,
             photoUrl = it.photoUrl,
-            publicationDate = it.publicationDate,
+            publicationDate = it.publicationDate.toString(),
             isFavorite = it.isFavorite
         )
     }
@@ -22,7 +22,7 @@ fun PictureItem.toPicture(): Picture {
         title = title,
         content = content,
         photoUrl = photoUrl,
-        publicationDate = publicationDate,
+        publicationDate = publicationDate.toLong(),
         isFavorite = isFavorite
     )
 }

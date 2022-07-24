@@ -7,6 +7,6 @@ data class PictureItem(
     val title: String,
     val content: String,
     val photoUrl: String,
-    val publicationDate: Long,
+    val publicationDate: String,
     var isFavorite: Boolean
 ) : Serializable
