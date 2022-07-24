@@ -24,6 +24,12 @@ class LoginFragmentViewModel(
     private val _passwordState = MutableLiveData<FieldsState>()
     val passwordState: LiveData<FieldsState> get() = _passwordState
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
     private var isValid: Boolean = false
 
     private val _isValidToken = MutableLiveData<Boolean>()
@@ -44,9 +50,15 @@ class LoginFragmentViewModel(
             when (it) {
                 is Resource.Success -> {
                     _isValidToken.postValue(true)
+                    _isLoading.postValue(false)
                 }
-                is Resource.Error -> {}
-                is Resource.Loading -> {}
+                is Resource.Error -> {
+                    _error.postValue(it.message ?: "")
+                    _isLoading.postValue(false)
+                }
+                is Resource.Loading -> {
+                    _isLoading.postValue(true)
+                }
             }
         }
     }

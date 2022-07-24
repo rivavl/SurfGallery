@@ -3,6 +3,7 @@ package com.marina.surfgallery.core.data.repository
 import android.graphics.Bitmap
 import android.util.Log
 import com.marina.surfgallery.common.DataSourceHelper
+import com.marina.surfgallery.common.Resource
 import com.marina.surfgallery.common.RetrofitInstance
 import com.marina.surfgallery.core.data.local.db.AppDatabase
 import com.marina.surfgallery.core.data.local.file.InternalStoragePicture
@@ -22,19 +23,25 @@ class PictureRepositoryImpl(
 
     private val dao = database.pictureDao()
 
-    override suspend fun getPictures(): List<Picture> {
+    override suspend fun getPictures(): Resource<List<Picture>> {
         val token = dataSourceHelper.getUserInfo().token
         val favoritePics = dao.getIdsOfFavoritePictures()
-        val allPics = RetrofitInstance.pictureApi.getAllPictures("Token $token").toList().toDomain()
-        Log.d("PictureRepositoryImpl", "all: $allPics")
-        Log.e("PictureRepositoryImpl", "db: $favoritePics")
-        for (i in allPics.indices) {
-            if (allPics[i].id in favoritePics) {
-                allPics[i].isFavorite = true
+        val response = RetrofitInstance.pictureApi.getAllPictures("Token $token")
+
+        val result: Resource<List<Picture>>
+
+        if (response.isSuccessful) {
+            val allPics = response.body()!!.toList().toDomain()
+            for (i in allPics.indices) {
+                if (allPics[i].id in favoritePics) {
+                    allPics[i].isFavorite = true
+                }
             }
+            result = Resource.Success(allPics)
+        } else {
+            result = Resource.Error("Ошибка")
         }
-        Log.d("PictureRepositoryImpl", "all after: $allPics")
-        return allPics
+        return result
     }
 
     override suspend fun savePicture(picture: Picture) {
@@ -60,7 +67,15 @@ class PictureRepositoryImpl(
         dao.deletePicture(id)
     }
 
-    override suspend fun getFilteredPictures(query: String): List<Picture> {
-        return getPictures().filter { it.title.contains(query) }
+    override suspend fun getFilteredPictures(query: String): Resource<List<Picture>> {
+        val result: Resource<List<Picture>>
+        val response = getPictures()
+        if (response is Resource.Success) {
+            val data = response.data?.filter { it.title.contains(query) }
+            result = data?.let { Resource.Success(it) }!!
+        } else {
+            result = Resource.Error(response.message!!)
+        }
+        return  result
     }
 }

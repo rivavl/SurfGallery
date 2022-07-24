@@ -15,9 +15,7 @@ class GetFilteredPicturesUseCase(
         try {
             emit(Resource.Loading())
             val pictures = repository.getFilteredPictures(query)
-            emit(Resource.Success(pictures))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "Непредвиденная ошибка"))
+            emit(Resource.Success(pictures.data!!))
         } catch (e: IOException) {
             emit(Resource.Error("Отсутствует интернет соединение\n Попробуйте позже"))
         }

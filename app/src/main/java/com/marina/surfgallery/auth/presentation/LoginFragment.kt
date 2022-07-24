@@ -65,8 +65,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun initBinding(view: View) {
         binding = FragmentLoginBinding.bind(view)
-        binding.loginTil.errorIconDrawable = null
-        binding.passwordTil.errorIconDrawable = null
     }
 
     private fun subscribeOnLiveData() {
@@ -93,13 +91,20 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
+
+        viewModel.error.observe(viewLifecycleOwner) {
+            showSnackbar(it)
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.enterButton.isLoading = it
+        }
     }
 
     private fun setOnClickListener() {
         binding.enterButton.setOnClickListener {
             val password = binding.passwordEdt.text.toString()
             viewModel.checkLoginData(password)
-            showSnackbar("112121212")
         }
     }
 
