@@ -3,6 +3,7 @@ package com.marina.surfgallery.core.presentation.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
 import com.marina.surfgallery.app.App
+import com.marina.surfgallery.common.entity.Resource
 import com.marina.surfgallery.core.presentation.ViewModelFactoryCore
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
 import com.marina.surfgallery.core.presentation.entity.PictureItem
@@ -46,8 +48,28 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView()
 
         viewModel.picturesList.observe(viewLifecycleOwner) {
-            picturesListAdapter.submitList(it.data)
+            when (it) {
+                is Resource.Success -> {
+                    setProgressBarVisibility(false)
+                    picturesListAdapter.submitList(it.data)
+                    binding.refreshButton.visibility = View.GONE
+                    binding.noResult.visibility = View.GONE
+                }
+                is Resource.Loading -> {
+                    setProgressBarVisibility(true)
+                    binding.refreshButton.visibility = View.GONE
+                    binding.noResult.visibility = View.GONE
+                }
+                is Resource.Error -> {
+                    binding.refreshButton.visibility = View.VISIBLE
+                    binding.noResult.visibility = View.VISIBLE
+                }
+            }
         }
+    }
+
+    private fun setProgressBarVisibility(isVisible: Boolean) {
+        binding.progressBar.isVisible = isVisible
     }
 
     private fun setupRecyclerView() {
@@ -78,6 +100,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.searchIv.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+
+        binding.refreshButton.setOnClickListener {
+            viewModel.getPictures()
         }
     }
 

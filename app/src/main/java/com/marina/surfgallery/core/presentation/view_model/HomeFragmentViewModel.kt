@@ -31,7 +31,7 @@ class HomeFragmentViewModel @Inject constructor(
         getPictures()
     }
 
-    private fun getPictures() = viewModelScope.launch {
+    fun getPictures() = viewModelScope.launch {
         getAllPicturesUseCase().collect { result ->
             when (result) {
                 is Resource.Success -> {
