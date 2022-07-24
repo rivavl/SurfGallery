@@ -2,7 +2,6 @@ package com.marina.surfgallery.auth.domain.use_case.request
 
 import com.marina.surfgallery.auth.domain.repository.AuthRepository
 import com.marina.surfgallery.common.Resource
-import com.marina.surfgallery.common.Result
 import com.marina.surfgallery.common.Result.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.marina.surfgallery.auth.presentation.LoginFragment"
+        android:name="com.marina.surfgallery.auth.presentation.fragment.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
@@ -29,7 +29,7 @@
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.marina.surfgallery.profile.presentation.ProfileFragment"
+        android:name="com.marina.surfgallery.auth.presentation.fragment.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"

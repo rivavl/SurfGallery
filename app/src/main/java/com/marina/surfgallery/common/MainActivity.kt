@@ -7,7 +7,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 

@@ -8,4 +8,6 @@ interface SavePictureInStorage {
     suspend fun loadPicture(name: String): InternalStoragePicture
 
     suspend fun loadAllPictures(): List<InternalStoragePicture>
+
+    suspend fun deleteAllPictures()
 }

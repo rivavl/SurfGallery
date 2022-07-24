@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
+import com.marina.surfgallery.auth.presentation.view_model.LoginFragmentViewModel
 
 class ViewModelFactory(
     private val validateLoginUseCase: ValidateLoginUseCase,

@@ -1,7 +1,7 @@
 package com.marina.surfgallery.profile.presentation.mapper
 
 import com.marina.surfgallery.common.UserInfo
-import com.marina.surfgallery.profile.presentation.entity.User
+import com.marina.surfgallery.auth.presentation.entity.User
 
 fun UserInfo.toUser(): User {
     return User(

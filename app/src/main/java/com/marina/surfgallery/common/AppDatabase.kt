@@ -1,15 +1,19 @@
-package com.marina.surfgallery.core.data.local.db
+package com.marina.surfgallery.common
 
 import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.marina.surfgallery.auth.data.local.AuthDao
+import com.marina.surfgallery.core.data.local.db.PictureDao
 import com.marina.surfgallery.core.data.local.db.entity.PictureDB
 
 @Database(entities = [PictureDB::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun pictureDao(): PictureDao
+
+    abstract fun authDao(): AuthDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null

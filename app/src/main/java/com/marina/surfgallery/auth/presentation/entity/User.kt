@@ -1,4 +1,4 @@
-package com.marina.surfgallery.profile.presentation.entity
+package com.marina.surfgallery.auth.presentation.entity
 
 data class User(
     val firstName: String,

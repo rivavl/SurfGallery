@@ -1,4 +1,4 @@
-package com.marina.surfgallery.auth.presentation
+package com.marina.surfgallery.auth.presentation.view_model
 
 import android.util.Log
 import androidx.lifecycle.LiveData

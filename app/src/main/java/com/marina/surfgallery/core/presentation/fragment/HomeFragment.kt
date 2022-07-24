@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
 import com.marina.surfgallery.common.SharedPrefsHelper
-import com.marina.surfgallery.core.data.local.db.AppDatabase
+import com.marina.surfgallery.common.AppDatabase
+import com.marina.surfgallery.common.Constants
 import com.marina.surfgallery.core.data.local.file.SavePictureInFile
 import com.marina.surfgallery.core.data.repository.PictureRepositoryImpl
 import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
@@ -38,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             View.VISIBLE
         setupRecyclerView()
 
-        val sp = requireContext().getSharedPreferences("1234567890", Context.MODE_PRIVATE)
+        val sp = requireContext().getSharedPreferences(Constants.SHARED_PREFS_NAME, Context.MODE_PRIVATE)
         val dataSource = SharedPrefsHelper(sp)
         val saver = SavePictureInFile(requireActivity().application)
         val database = AppDatabase.getInstance(requireActivity().application)
@@ -82,6 +83,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         picturesListAdapter.onPictureItemClick = {
             val action = HomeFragmentDirections.actionHomeFragmentToFragmentDetail(it)
             findNavController().navigate(action)
+        }
+
+        binding.searchIv.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
 }

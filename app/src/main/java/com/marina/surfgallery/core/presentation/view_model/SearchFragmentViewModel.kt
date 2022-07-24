@@ -27,7 +27,7 @@ class SearchFragmentViewModel(
     val picturesList: LiveData<Resource<List<PictureItem>>> get() = _picturesList
 
     fun getPictures(query: String) = viewModelScope.launch {
-        getFilteredPicturesUseCase(query).collect { result ->
+        getFilteredPicturesUseCase(query.lowercase()).collect { result ->
             when (result) {
                 is Resource.Success -> {
                     _picturesList.postValue(

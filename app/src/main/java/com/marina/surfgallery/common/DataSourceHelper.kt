@@ -5,4 +5,6 @@ interface DataSourceHelper {
     fun saveUserInfo(userInfo: UserInfo)
 
     fun getUserInfo(): UserInfo
+
+    fun deleteUserInfo()
 }

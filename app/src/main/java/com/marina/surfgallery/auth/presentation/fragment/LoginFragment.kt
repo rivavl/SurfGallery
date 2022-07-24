@@ -1,20 +1,26 @@
-package com.marina.surfgallery.auth.presentation
+package com.marina.surfgallery.auth.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.marina.surfgallery.R
-import com.marina.surfgallery.auth.data.repository.AuthRepositoryImpl
+import com.marina.surfgallery.auth.data.repository.auth.AuthRepositoryImpl
 import com.marina.surfgallery.auth.domain.use_case.request.LoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidateLoginUseCase
 import com.marina.surfgallery.auth.domain.use_case.validation.ValidatePasswordUseCase
+import com.marina.surfgallery.auth.presentation.ViewModelFactory
 import com.marina.surfgallery.auth.presentation.entity.FieldsState
+import com.marina.surfgallery.auth.presentation.view_model.LoginFragmentViewModel
+import com.marina.surfgallery.common.AppDatabase
+import com.marina.surfgallery.common.Constants
 import com.marina.surfgallery.common.SharedPrefsHelper
+import com.marina.surfgallery.core.data.local.file.SavePictureInFile
 import com.marina.surfgallery.databinding.FragmentLoginBinding
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.MaskedTextChangedListener.Companion.installOn
@@ -33,9 +39,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         val passwordUseCase = ValidatePasswordUseCase()
         val loginUseCase = ValidateLoginUseCase()
-        val sp = requireContext().getSharedPreferences("1234567890", Context.MODE_PRIVATE)
+        val sp = requireContext().getSharedPreferences(
+            Constants.SHARED_PREFS_NAME,
+            Context.MODE_PRIVATE
+        )
         val dataSourceHelper = SharedPrefsHelper(sp)
-        val repository = AuthRepositoryImpl(dataSourceHelper)
+        val saver = SavePictureInFile(requireActivity().application)
+        val database = AppDatabase.getInstance(requireActivity().application)
+        val repository = AuthRepositoryImpl(dataSourceHelper, database, saver)
         val userInfoUseCase = LoginUseCase(repository)
         viewModel = ViewModelProvider(
             this,
@@ -44,7 +55,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         subscribeOnLiveData()
         setOnClickListener()
-
+        if (requireContext().getSharedPreferences(
+                Constants.SHARED_PREFS_NAME,
+                AppCompatActivity.MODE_PRIVATE
+            ).all.isNotEmpty()
+        ) {
+           launchFragment(R.id.action_loginFragment_to_homeFragment)
+        }
     }
 
     private fun initLoginMask() {
@@ -114,6 +131,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             info,
             Snackbar.LENGTH_LONG
         ).setAnchorView(binding.enterButton).show()
+    }
+
+
+    private fun launchFragment(id: Int) {
+        findNavController().navigate(id)
     }
 
     companion object {

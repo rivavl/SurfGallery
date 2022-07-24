@@ -1,23 +1,22 @@
-package com.marina.surfgallery.profile.domain.use_case
+package com.marina.surfgallery.auth.domain.use_case.profile
 
+import android.util.Log
+import com.marina.surfgallery.auth.domain.repository.AuthRepository
 import com.marina.surfgallery.common.Resource
 import com.marina.surfgallery.common.UserInfo
-import com.marina.surfgallery.profile.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 import java.io.IOException
 
 class GetUserInfoUseCase(
-    private val repository: ProfileRepository
+    private val repository: AuthRepository
 ) {
     suspend operator fun invoke(): Flow<Resource<UserInfo>> = flow {
         try {
             emit(Resource.Loading())
-            val pictures = repository.getUserInfo()
-            emit(Resource.Success(pictures))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "Непредвиденная ошибка"))
+            val userInfo = repository.getUserInfo()
+            Log.e("GetUserInfoUseCase", userInfo.toString())
+            emit(Resource.Success(userInfo))
         } catch (e: IOException) {
             emit(Resource.Error("Отсутствует интернет соединение\n Попробуйте позже"))
         }

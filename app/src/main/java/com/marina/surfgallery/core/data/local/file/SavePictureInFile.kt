@@ -11,6 +11,7 @@ import java.io.IOException
 class SavePictureInFile(
     private val context: Application
 ) : SavePictureInStorage {
+
     override suspend fun savePicture(pic: InternalStoragePicture) {
         try {
             context.openFileOutput(pic.name, MODE_PRIVATE).use { stream ->
@@ -33,7 +34,6 @@ class SavePictureInFile(
     }
 
     override suspend fun loadPicture(name: String): InternalStoragePicture {
-
         val files = context.filesDir.listFiles()
         files?.first { it.canRead() && it.isFile && it.name.equals(name) }?.apply {
             val bytes = this.readBytes()
@@ -50,6 +50,12 @@ class SavePictureInFile(
             val bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
             InternalStoragePicture(it.name, bmp)
         } ?: listOf()
+    }
 
+    override suspend fun deleteAllPictures() {
+        val allPics = loadAllPictures()
+        for (pic in allPics) {
+            deletePicture(pic.name)
+        }
     }
 }

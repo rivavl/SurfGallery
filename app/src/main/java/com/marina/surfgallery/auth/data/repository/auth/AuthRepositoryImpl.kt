@@ -1,17 +1,20 @@
-package com.marina.surfgallery.auth.data.repository
+package com.marina.surfgallery.auth.data.repository.auth
 
 import com.marina.surfgallery.auth.data.mappers.toUserInfo
 import com.marina.surfgallery.auth.data.remote.entity.request.LoginRequestBody
 import com.marina.surfgallery.auth.domain.repository.AuthRepository
-import com.marina.surfgallery.common.DataSourceHelper
-import com.marina.surfgallery.common.Result
-import com.marina.surfgallery.common.RetrofitInstance
-import com.marina.surfgallery.common.UserInfo
+import com.marina.surfgallery.common.*
+import com.marina.surfgallery.core.data.local.file.SavePictureInStorage
 
 class AuthRepositoryImpl(
 //    private val api: AuthApi
-    private val dataSourceHelper: DataSourceHelper
+    private val dataSourceHelper: DataSourceHelper,
+//    private val authDao: AuthDao
+    private val database: AppDatabase,
+    private val saveHelper: SavePictureInStorage
 ) : AuthRepository {
+
+    val dao = database.authDao()
 
     override suspend fun login(login: String, password: String): Result {
         val body = LoginRequestBody(phone = login, password = password)
@@ -32,4 +35,13 @@ class AuthRepositoryImpl(
         dataSourceHelper.saveUserInfo(userInfo)
     }
 
+    override suspend fun getUserInfo(): UserInfo {
+        return dataSourceHelper.getUserInfo()
+    }
+
+    override suspend fun logout() {
+        dataSourceHelper.deleteUserInfo()
+        dao.dropTable()
+        saveHelper.deleteAllPictures()
+    }
 }

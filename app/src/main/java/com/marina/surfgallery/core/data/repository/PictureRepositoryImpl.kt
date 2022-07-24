@@ -5,7 +5,7 @@ import android.util.Log
 import com.marina.surfgallery.common.DataSourceHelper
 import com.marina.surfgallery.common.Resource
 import com.marina.surfgallery.common.RetrofitInstance
-import com.marina.surfgallery.core.data.local.db.AppDatabase
+import com.marina.surfgallery.common.AppDatabase
 import com.marina.surfgallery.core.data.local.file.InternalStoragePicture
 import com.marina.surfgallery.core.data.local.file.SavePictureInStorage
 import com.marina.surfgallery.core.data.mapper.toDomain
@@ -71,7 +71,7 @@ class PictureRepositoryImpl(
         val result: Resource<List<Picture>>
         val response = getPictures()
         if (response is Resource.Success) {
-            val data = response.data?.filter { it.title.contains(query) }
+            val data = response.data?.filter { it.title.lowercase().contains(query) }
             result = data?.let { Resource.Success(it) }!!
         } else {
             result = Resource.Error(response.message!!)
