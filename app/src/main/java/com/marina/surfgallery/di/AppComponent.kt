@@ -5,7 +5,6 @@ import com.marina.surfgallery.auth.di.AuthDataModule
 import com.marina.surfgallery.auth.di.AuthViewModelModule
 import com.marina.surfgallery.auth.presentation.fragment.LoginFragment
 import com.marina.surfgallery.auth.presentation.fragment.ProfileFragment
-import com.marina.surfgallery.common.di.CommonModule
 import com.marina.surfgallery.core.di.CoreDataModule
 import com.marina.surfgallery.core.di.CoreViewModelModule
 import com.marina.surfgallery.core.presentation.fragment.FavoriteFragment
@@ -19,7 +18,6 @@ import dagger.Component
     modules = [
         AuthDataModule::class,
         AuthViewModelModule::class,
-        CommonModule::class,
         CoreDataModule::class,
         CoreViewModelModule::class
     ]
