@@ -13,6 +13,7 @@ import com.marina.surfgallery.R
 import com.marina.surfgallery.app.App
 import com.marina.surfgallery.core.presentation.ViewModelFactoryCore
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
+import com.marina.surfgallery.core.presentation.entity.PictureItem
 import com.marina.surfgallery.core.presentation.view_model.HomeFragmentViewModel
 import com.marina.surfgallery.databinding.FragmentHomeBinding
 import javax.inject.Inject
@@ -67,8 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         picturesListAdapter.onPictureItemClickListenerDelete = {
-            it.isFavorite = false
-            viewModel.deletePicture(it)
+            createDialog(it)
         }
 
         picturesListAdapter.onPictureItemClick = {
@@ -80,4 +80,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
+
+    private fun createDialog(pictureItem: PictureItem) {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setMessage("Вы точно хотете удалить из избранного?")
+            .setPositiveButton(
+                "Да, точно"
+            ) { _, _ ->
+                viewModel.deletePicture(pictureItem)
+                pictureItem.isFavorite = false
+            }
+            .setNegativeButton("Нет") { _, _ -> }
+            .create()
+            .show()
+    }
+
 }

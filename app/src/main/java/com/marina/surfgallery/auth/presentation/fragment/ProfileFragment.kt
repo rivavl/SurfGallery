@@ -72,8 +72,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
 
         binding.enterButton.setOnClickListener {
-            viewModel.logout()
+            createDialog()
         }
+    }
+
+    private fun createDialog() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setMessage("Вы точно хотете выйти из приложения?")
+            .setPositiveButton(
+                "Да, точно"
+            ) { _, _ ->
+                viewModel.logout()
+            }
+            .setNegativeButton("Нет") { _, _ -> }
+            .create()
+            .show()
     }
 
     private fun showSnackbar(info: String) {

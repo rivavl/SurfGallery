@@ -13,6 +13,7 @@ import com.marina.surfgallery.R
 import com.marina.surfgallery.app.App
 import com.marina.surfgallery.core.presentation.ViewModelFactoryCore
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
+import com.marina.surfgallery.core.presentation.entity.PictureItem
 import com.marina.surfgallery.core.presentation.view_model.FavoriteFragmentViewModel
 import com.marina.surfgallery.databinding.FragmentFavoritesBinding
 import javax.inject.Inject
@@ -61,13 +62,28 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorites) {
 
     private fun setupClickListener() {
         picturesListAdapter.onPictureItemClickListenerDelete = {
-            it.isFavorite = false
-            viewModel.deletePicture(it)
+            createDialog(it)
+//            it.isFavorite = false
+//            viewModel.deletePicture(it)
         }
 
         picturesListAdapter.onPictureItemClick = {
             val action = FavoriteFragmentDirections.actionFavoriteFragmentToFragmentDetail(it)
             findNavController().navigate(action)
         }
+    }
+
+    private fun createDialog(pictureItem: PictureItem) {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setMessage("Вы точно хотете удалить из избранного?")
+            .setPositiveButton(
+                "Да, точно"
+            ) { _, _ ->
+                viewModel.deletePicture(pictureItem)
+                pictureItem.isFavorite = false
+            }
+            .setNegativeButton("Нет") { _, _ -> }
+            .create()
+            .show()
     }
 }
