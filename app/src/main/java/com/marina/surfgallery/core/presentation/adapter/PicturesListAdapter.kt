@@ -21,6 +21,7 @@ class PicturesListAdapter :
 
     var onPictureItemClickListenerSave: ((PictureItem, Bitmap) -> Unit)? = null
     var onPictureItemClickListenerDelete: ((PictureItem) -> Unit)? = null
+    var onPictureItemClick: ((PictureItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureItemViewHolder {
         val layout = R.layout.image_item
@@ -41,6 +42,10 @@ class PicturesListAdapter :
             onPictureItemClickListenerSave?.invoke(picture, holder.image.drawable.toBitmap())
             holder.heartFill.visibility = View.VISIBLE
             holder.heartOutline.visibility = View.GONE
+        }
+
+        holder.itemView.setOnClickListener {
+            onPictureItemClick?.invoke(picture)
         }
 
         with(holder) {

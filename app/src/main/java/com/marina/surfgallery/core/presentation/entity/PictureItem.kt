@@ -1,5 +1,7 @@
 package com.marina.surfgallery.core.presentation.entity
 
+import java.io.Serializable
+
 data class PictureItem(
     val id: String,
     val title: String,
@@ -7,4 +9,4 @@ data class PictureItem(
     val photoUrl: String,
     val publicationDate: Long,
     var isFavorite: Boolean
-)
+) : Serializable

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,14 +14,12 @@ import com.marina.surfgallery.common.SharedPrefsHelper
 import com.marina.surfgallery.core.data.local.db.AppDatabase
 import com.marina.surfgallery.core.data.local.file.SavePictureInFile
 import com.marina.surfgallery.core.data.repository.PictureRepositoryImpl
-import com.marina.surfgallery.core.domain.use_case.*
+import com.marina.surfgallery.core.domain.use_case.DeletePictureUseCase
+import com.marina.surfgallery.core.domain.use_case.GetFavoritePicturesUseCase
 import com.marina.surfgallery.core.presentation.FavoriteViewModelFactory
-import com.marina.surfgallery.core.presentation.HomeViewModelFactory
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
 import com.marina.surfgallery.core.presentation.view_model.FavoriteFragmentViewModel
-import com.marina.surfgallery.core.presentation.view_model.HomeFragmentViewModel
 import com.marina.surfgallery.databinding.FragmentFavoritesBinding
-import com.marina.surfgallery.databinding.FragmentHomeBinding
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorites) {
 
@@ -68,6 +67,11 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorites) {
         picturesListAdapter.onPictureItemClickListenerDelete = {
             it.isFavorite = false
             viewModel.deletePicture(it)
+        }
+
+        picturesListAdapter.onPictureItemClick = {
+            val action = FavoriteFragmentDirections.actionFavoriteFragmentToFragmentDetail(it)
+            findNavController().navigate(action)
         }
     }
 }

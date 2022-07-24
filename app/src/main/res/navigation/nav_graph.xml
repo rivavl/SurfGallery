@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentDetail"
+            app:destination="@id/fragmentDetail" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -35,5 +38,17 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.marina.surfgallery.core.presentation.fragment.FavoriteFragment"
-        android:label="FavoriteFragment" />
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_fragmentDetail"
+            app:destination="@id/fragmentDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetail"
+        android:name="com.marina.surfgallery.core.presentation.fragment.DetailFragment"
+        android:label="FragmentDetail" >
+        <argument
+            android:name="pictureItem"
+            app:argType="com.marina.surfgallery.core.presentation.entity.PictureItem" />
+    </fragment>
 </navigation>
