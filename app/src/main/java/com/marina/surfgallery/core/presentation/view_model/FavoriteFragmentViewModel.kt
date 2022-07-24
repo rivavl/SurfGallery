@@ -1,5 +1,7 @@
 package com.marina.surfgallery.core.presentation.view_model
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import com.marina.surfgallery.core.domain.use_case.GetFavoritePicturesUseCase
 import com.marina.surfgallery.core.presentation.entity.PictureItem
 import com.marina.surfgallery.core.presentation.mapper.toPresentation
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class FavoriteFragmentViewModel @Inject constructor(
@@ -31,7 +34,13 @@ class FavoriteFragmentViewModel @Inject constructor(
                 is Resource.Success -> {
                     _picturesList.postValue(
                         Resource.Success(
-                            result.data?.toPresentation() ?: listOf()
+                            result.data?.toPresentation()?.map {
+                                it.copy(
+                                    publicationDate = formatDate(
+                                        it.publicationDate
+                                    )
+                                )
+                            } ?: listOf()
                         )
                     )
                 }
@@ -43,6 +52,13 @@ class FavoriteFragmentViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun formatDate(date: String): String {
+        val formatter = SimpleDateFormat("dd.MM.yy")
+        val date = formatter.format(date.toLong())
+        return date.toString()
     }
 
     fun deletePicture(pictureItem: PictureItem) = viewModelScope.launch {

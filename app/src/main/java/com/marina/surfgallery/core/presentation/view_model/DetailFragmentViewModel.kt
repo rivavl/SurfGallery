@@ -17,9 +17,14 @@ class DetailFragmentViewModel @Inject constructor() : ViewModel() {
 
     @SuppressLint("SimpleDateFormat")
     fun setPicture(pictureItem: PictureItem) {
-        val formatter = SimpleDateFormat("dd.MM.yy")
-        Log.e("setPicture", pictureItem.toString())
-        val date = formatter.format(pictureItem.publicationDate.toLong())
-        _picture.postValue(pictureItem.copy(publicationDate = date))
+        if (pictureItem.publicationDate.length !=  8) {
+            val formatter = SimpleDateFormat("dd.MM.yy")
+            Log.e("setPicture", pictureItem.toString())
+            val date = formatter.format(pictureItem.publicationDate.toLong())
+            _picture.postValue(pictureItem.copy(publicationDate = date))
+        } else{
+            _picture.postValue(pictureItem)
+        }
+
     }
 }

@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.marina.surfgallery.R
 import com.marina.surfgallery.app.App
 import com.marina.surfgallery.core.presentation.ViewModelFactoryCore
+import com.marina.surfgallery.core.presentation.adapter.FavoritesListAdapter
 import com.marina.surfgallery.core.presentation.adapter.PicturesListAdapter
 import com.marina.surfgallery.core.presentation.entity.PictureItem
 import com.marina.surfgallery.core.presentation.view_model.FavoriteFragmentViewModel
@@ -22,7 +23,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorites) {
 
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var picturesListAdapter: PicturesListAdapter
+    private lateinit var picturesListAdapter: FavoritesListAdapter
     private lateinit var viewModel: FavoriteFragmentViewModel
 
     @Inject
@@ -52,10 +53,9 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorites) {
 
     private fun setupRecyclerView() {
         recyclerView = binding.favoriteRv
-        picturesListAdapter = PicturesListAdapter()
+        picturesListAdapter = FavoritesListAdapter()
         recyclerView.apply {
             adapter = picturesListAdapter
-            layoutManager = GridLayoutManager(activity, 2)
         }
         setupClickListener()
     }
@@ -63,8 +63,6 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorites) {
     private fun setupClickListener() {
         picturesListAdapter.onPictureItemClickListenerDelete = {
             createDialog(it)
-//            it.isFavorite = false
-//            viewModel.deletePicture(it)
         }
 
         picturesListAdapter.onPictureItemClick = {

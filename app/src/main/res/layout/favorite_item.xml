@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:paddingBottom="16dp"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/rv_item_image"
@@ -12,6 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
         tools:src="@drawable/ic_launcher_foreground" />
 
     <TextView
@@ -32,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:gravity="end"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/rv_title"
         tools:text="01.01.2022" />
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:lines="1"
+        android:maxLength="70"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +52,24 @@
         tools:text="Сегодня был мой первый день в студии Surf..." />
 
     <ImageView
+        android:id="@+id/rv_heart_fill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="9dp"
         android:src="@drawable/heart_fill"
         app:layout_constraintEnd_toEndOf="@id/rv_item_image"
-        app:layout_constraintTop_toTopOf="@id/rv_item_image" />
+        app:layout_constraintTop_toTopOf="@id/rv_item_image"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/rv_heart_outline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
+        android:src="@drawable/heart_line_light"
+        app:layout_constraintEnd_toEndOf="@id/rv_item_image"
+        app:layout_constraintTop_toTopOf="@id/rv_item_image"
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
